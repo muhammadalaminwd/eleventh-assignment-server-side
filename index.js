@@ -17,18 +17,34 @@ async function run(){
     try{
         await client.connect();
         const productCollection = client.db('eleventh-assignment').collection('product');
-
         app.get('/product', async(req, res) => {
             const query = {};
             const cursor = productCollection.find(query);
             const products = await cursor.toArray();
             res.send(products);
-        })
+        });
+
+        app.get('/product/:id', async(req, res) => {
+            const id = req.id;
+            console.log(id)
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+
+            // POST
+
+    app.post('/service', async(req, res) => {
+        const newService = req.body;
+        const result = await serviceCollection.insertOne(newService);
+        res.send(result);
+    })
 
 
     }
     finally{
-        
+        // await client.close();
     }
 }
 run().catch(console.dir);
