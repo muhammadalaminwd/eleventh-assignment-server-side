@@ -70,4 +70,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
+    console.log('Are you listening to me?', port);
 })
